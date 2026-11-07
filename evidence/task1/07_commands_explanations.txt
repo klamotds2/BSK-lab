@@ -1,0 +1,131 @@
+=== BSK Task 1 - Important commands and explanations ===
+
+1. Groups
+
+groupadd pracownicy
+groupadd administracja
+groupadd ksiegowosc
+groupadd it
+
+Purpose:
+Creates groups representing all employees and individual company departments.
+
+
+2. Users
+
+useradd -m -s /bin/bash anna
+useradd -m -s /bin/bash bartek
+useradd -m -s /bin/bash celina
+
+Purpose:
+Creates three Linux users with home directories and Bash as their login shell.
+
+
+3. Group membership
+
+usermod -aG pracownicy,administracja anna
+usermod -aG pracownicy,ksiegowosc bartek
+usermod -aG pracownicy,it celina
+
+Purpose:
+Assigns each employee to the common pracownicy group and to the appropriate departmental group.
+
+
+4. Company directories
+
+mkdir -p /firma/{public,administracja,ksiegowosc,it}
+
+Purpose:
+Creates the required directory structure for the company.
+
+
+5. Directory ownership
+
+chown root:pracownicy /firma/public
+chown root:administracja /firma/administracja
+chown root:ksiegowosc /firma/ksiegowosc
+chown root:it /firma/it
+
+Purpose:
+Assigns each directory to the group that should have access to it.
+
+
+6. Directory permissions
+
+chmod 2770 /firma/public
+chmod 2770 /firma/administracja
+chmod 2770 /firma/ksiegowosc
+chmod 2770 /firma/it
+
+Purpose:
+Mode 2770 gives full rwx access to the owner and assigned group and no access
+to other users.
+
+The leading 2 enables the SGID bit on the directory. Files and subdirectories
+created inside inherit the directory group. This helps maintain consistent
+group ownership in shared departmental directories.
+
+
+7. Confidential file
+
+chmod 600 /firma/ksiegowosc/poufne.txt
+
+Purpose:
+Mode 600 allows only the owner to read and modify the confidential file.
+Group members and other users receive no permissions to the file.
+
+
+8. SHA-256
+
+sha256sum /firma/ksiegowosc/poufne.txt
+
+Purpose:
+Calculates the SHA-256 cryptographic hash used to verify file integrity.
+
+
+9. Encryption
+
+openssl enc -aes-256-cbc -salt -pbkdf2 \
+  -in /firma/ksiegowosc/poufne.txt \
+  -out /firma/ksiegowosc/poufne.txt.enc
+
+Purpose:
+Encrypts the confidential file using AES-256-CBC. A salt is used and PBKDF2
+derives the encryption key from the passphrase.
+
+
+10. Decryption
+
+openssl enc -d -aes-256-cbc -pbkdf2 \
+  -in /firma/ksiegowosc/poufne.txt.enc \
+  -out /firma/ksiegowosc/poufne_odszyfrowane.txt
+
+Purpose:
+Decrypts the protected file using the same passphrase.
+
+
+11. Integrity verification
+
+sha256sum /firma/ksiegowosc/poufne.txt
+sha256sum /firma/ksiegowosc/poufne_odszyfrowane.txt
+
+cmp /firma/ksiegowosc/poufne.txt /firma/ksiegowosc/poufne_odszyfrowane.txt
+
+Purpose:
+Matching SHA-256 values and a successful byte-for-byte comparison demonstrate
+that the decrypted file is identical to the original.
+
+
+=== Why chmod 777 is usually a bad solution for confidential data ===
+
+Permissions 777 give read, write and execute permissions to the file owner,
+members of its group, and all other users.
+
+For confidential data this violates the principle of least privilege.
+Unauthorized users could read, modify or replace protected information.
+On directories, write permission may also allow unauthorized users to create,
+delete or rename files.
+
+Permissions should therefore be granted only to users or groups that require
+them. In this exercise departmental access is controlled through dedicated
+groups and mode 2770, while the confidential file itself uses mode 600.

@@ -1,0 +1,9 @@
+=== Final permissions of confidential files ===
+-rw------- 1 bartek ksiegowosc 32 Nov  7 11:31 /firma/ksiegowosc/poufne.txt
+-rw------- 1 root   ksiegowosc 64 Nov  7 12:02 /firma/ksiegowosc/poufne.txt.enc
+-rw------- 1 root   ksiegowosc 32 Nov  7 12:05 /firma/ksiegowosc/poufne_odszyfrowane.txt
+
+=== Final integrity verification ===
+f2d977ce548893c302b993861cec3aa755f8357ea1d0689325c1ad51de1040d0  /firma/ksiegowosc/poufne.txt
+f2d977ce548893c302b993861cec3aa755f8357ea1d0689325c1ad51de1040d0  /firma/ksiegowosc/poufne_odszyfrowane.txt
+RESULT: original and decrypted files are identical
