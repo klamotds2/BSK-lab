@@ -1,0 +1,7 @@
+=== BSK Task 1 - Confidential file protection ===
+
+--- File permissions ---
+-rw------- 1 bartek ksiegowosc 32 Nov  7 11:31 /firma/ksiegowosc/poufne.txt
+
+--- SHA-256 before encryption ---
+f2d977ce548893c302b993861cec3aa755f8357ea1d0689325c1ad51de1040d0  /firma/ksiegowosc/poufne.txt

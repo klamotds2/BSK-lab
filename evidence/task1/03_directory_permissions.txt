@@ -1,0 +1,7 @@
+=== BSK Task 1 - Directory permissions ===
+
+drwxr-xr-x 6 root root          4096 Nov  7 11:26 /firma
+drwxrws--- 2 root administracja 4096 Nov  7 11:27 /firma/administracja
+drwxrws--- 2 root it            4096 Nov  7 11:27 /firma/it
+drwxrws--- 2 root ksiegowosc    4096 Nov  7 11:27 /firma/ksiegowosc
+drwxrws--- 2 root pracownicy    4096 Nov  7 11:27 /firma/public

@@ -1,0 +1,19 @@
+# Docker checkpoints - stored separately
+backup/
+*.tar
+
+# Secrets
+*.key
+*.pem
+*.p12
+*.pfx
+*.password
+*.secret
+.env
+.env.*
+
+# Temporary files
+*.tmp
+*.log
+Thumbs.db
+.DS_Store

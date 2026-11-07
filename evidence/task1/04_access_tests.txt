@@ -1,0 +1,22 @@
+=== BSK Task 1 - Access control tests ===
+
+[TEST] Anna -> administracja (EXPECTED: ALLOWED)
+RESULT: ALLOWED
+
+[TEST] Anna -> ksiegowosc (EXPECTED: DENIED)
+touch: cannot touch '/firma/ksiegowosc/anna_denied.txt': Permission denied
+RESULT: DENIED - correct
+
+[TEST] Bartek -> ksiegowosc (EXPECTED: ALLOWED)
+RESULT: ALLOWED
+
+[TEST] Bartek -> it (EXPECTED: DENIED)
+touch: cannot touch '/firma/it/bartek_denied.txt': Permission denied
+RESULT: DENIED - correct
+
+[TEST] Celina -> it (EXPECTED: ALLOWED)
+RESULT: ALLOWED
+
+[TEST] Celina -> administracja (EXPECTED: DENIED)
+touch: cannot touch '/firma/administracja/celina_denied.txt': Permission denied
+RESULT: DENIED - correct

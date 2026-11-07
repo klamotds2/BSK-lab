@@ -1,0 +1,19 @@
+=== BSK Task 1 - Users and groups ===
+
+--- anna ---
+uid=1001(anna) gid=1005(anna) groups=1005(anna),1001(pracownicy),1002(administracja)
+anna : anna pracownicy administracja
+
+--- bartek ---
+uid=1002(bartek) gid=1006(bartek) groups=1006(bartek),1001(pracownicy),1003(ksiegowosc)
+bartek : bartek pracownicy ksiegowosc
+
+--- celina ---
+uid=1003(celina) gid=1007(celina) groups=1007(celina),1001(pracownicy),1004(it)
+celina : celina pracownicy it
+
+--- Company groups ---
+pracownicy:x:1001:anna,bartek,celina
+administracja:x:1002:anna
+ksiegowosc:x:1003:bartek
+it:x:1004:celina
