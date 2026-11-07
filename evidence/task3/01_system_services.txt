@@ -1,0 +1,24 @@
+=== BSK Task 3 - Services and ports BEFORE hardening ===
+
+--- Listening ports ---
+Netid State  Recv-Q Send-Q Local Address:Port Peer Address:PortProcess                         
+tcp   LISTEN 0      1            0.0.0.0:9000      0.0.0.0:*    users:(("nc",pid=86,fd=3))     
+tcp   LISTEN 0      511          0.0.0.0:443       0.0.0.0:*    users:(("apache2",pid=28,fd=4))
+tcp   LISTEN 0      128          0.0.0.0:22        0.0.0.0:*    users:(("sshd",pid=23,fd=3))   
+tcp   LISTEN 0      511          0.0.0.0:80        0.0.0.0:*    users:(("apache2",pid=28,fd=3))
+tcp   LISTEN 0      128             [::]:22           [::]:*    users:(("sshd",pid=23,fd=4))   
+
+--- Relevant processes ---
+root          23  0.0  0.0  12036  4208 ?        Ss   12:30   0:00 sshd: /usr/sbin/sshd [listener] 0 of 10-100 startups
+root          28  0.0  0.0  13976  9120 ?        Ss   12:30   0:00 /usr/sbin/apache2 -k start
+www-data      29  0.0  0.0 2006560 11644 ?       Sl   12:30   0:00 /usr/sbin/apache2 -k start
+www-data      30  0.0  0.0 2006492 6984 ?        Sl   12:30   0:00 /usr/sbin/apache2 -k start
+root          86  0.0  0.0   3444  1832 ?        S    12:30   0:00 nc -lk -p 9000
+
+--- Assessment ---
+22/tcp   SSH     REQUIRED - remote administration
+80/tcp   HTTP    REQUIRED - web service
+443/tcp  HTTPS   REQUIRED - encrypted web service
+9000/tcp netcat  UNNECESSARY - laboratory test listener
+
+Port 9000 increases attack surface and is not required by the server role.

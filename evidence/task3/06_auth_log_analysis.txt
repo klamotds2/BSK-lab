@@ -1,0 +1,115 @@
+=== BSK Task 3 - Analysis of BSK_Z4_auth.log ===
+
+1. Successful authentication events
+
+192.168.56.11:
+- successful SSH public-key authentication for user student
+- ED25519 key LABKEY001
+- legitimate sessions observed at 09:03 and 10:20
+
+192.168.56.12:
+- successful SSH public-key authentication for user adminlab
+- ED25519 key LABKEY002
+- legitimate session observed at 11:45
+
+A normal sudo operation is also present:
+student -> sudo /usr/bin/apt update
+
+A root CRON session at 09:00 is consistent with a scheduled local task.
+
+
+2. Failed authentication attempts
+
+192.168.56.20:
+6 failed password attempts.
+
+203.0.113.55:
+3 failed password attempts.
+
+Total failed password events:
+9
+
+
+3. Invalid usernames
+
+Source 192.168.56.20 attempted authentication using nonexistent users:
+
+- oracle
+- admin
+- test
+
+This may indicate account enumeration or automated SSH probing.
+
+
+4. Suspicious activity from 192.168.56.20
+
+The source attempted multiple usernames and passwords in a short period:
+
+oracle -> invalid user
+admin -> invalid user
+student -> 3 failed password attempts
+test -> invalid user
+
+Assessment:
+The pattern is consistent with password guessing and account enumeration.
+The source generates the largest number of failed authentication events
+in the supplied log.
+
+
+5. Suspicious activity from 203.0.113.55
+
+The source attempted three consecutive password authentications for root:
+
+11:12:44 Failed password for root
+11:12:48 Failed password for root
+11:12:53 Failed password for root
+
+The connection subsequently terminated before authentication.
+
+Assessment:
+This is suspicious password-guessing activity targeting a privileged account.
+
+
+6. Source IP summary
+
+192.168.56.11 - legitimate public-key SSH access for student
+192.168.56.12 - legitimate public-key SSH access for adminlab
+192.168.56.20 - suspicious authentication attempts
+203.0.113.55  - suspicious root password attempts
+
+
+7. Security response
+
+Recommended controls:
+
+- Disable SSH root login.
+- Prefer public-key authentication over passwords.
+- Reduce MaxAuthTries.
+- Monitor repeated authentication failures.
+- Use automated blocking/rate limiting such as Fail2ban where appropriate.
+- Keep UFW restricted to required services.
+- Investigate repeated attempts from unexpected source addresses.
+
+Hardening already applied during this laboratory:
+
+PermitRootLogin no
+MaxAuthTries 3
+X11Forwarding no
+AllowTcpForwarding no
+
+
+8. Conclusion
+
+The log contains both normal administrative activity and clearly suspicious
+SSH authentication patterns.
+
+Public-key logins from 192.168.56.11 and 192.168.56.12 appear legitimate.
+
+192.168.56.20 is the most active suspicious source, generating six failed
+password events and attempting invalid usernames.
+
+203.0.113.55 specifically targets the root account with three failed
+password attempts.
+
+No successful authentication from either suspicious source is present
+in the supplied log.

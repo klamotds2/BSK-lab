@@ -1,0 +1,25 @@
+=== BSK Task 3 - Backup schedule ===
+
+--- Schedule ---
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+0 2 * * * root /usr/local/sbin/bsk-backup.sh
+
+--- Backup script ---
+#!/bin/bash
+/usr/bin/rsync -a --delete /firma/ /backup/firma/ >> /var/log/bsk-backup.log 2>&1
+
+--- Permissions ---
+-rw-r--r-- 1 root root 128 Nov  7 13:02 /etc/cron.d/bsk-backup
+-rwxr-x--- 1 root root  94 Nov  7 13:02 /usr/local/sbin/bsk-backup.sh
+
+--- Cron process ---
+root        1132  0.0  0.0   3820  1916 ?        Ss   13:03   0:00 cron
+
+--- Justification ---
+The backup is scheduled daily at 02:00.
+This time was selected as a typical low-activity period.
+Daily execution limits the potential loss window to approximately 24 hours.
+rsync transfers only changed data after the initial copy, reducing repeated I/O.
+The backup command is stored in a root-owned script rather than duplicated in cron.

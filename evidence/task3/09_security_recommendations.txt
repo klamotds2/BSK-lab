@@ -1,0 +1,86 @@
+=== BSK Task 3 - Security recommendations ===
+
+1. Prefer SSH public-key authentication
+
+Configure administrative accounts with individual SSH keys and, after
+verification, disable PasswordAuthentication.
+
+Reason:
+The analysed authentication log contains repeated password-guessing attempts.
+Key-based authentication substantially reduces exposure to password attacks.
+
+
+2. Keep direct root SSH login disabled
+
+Retain:
+
+PermitRootLogin no
+
+Reason:
+The supplied authentication log contains repeated attempts to authenticate
+directly as root. Administrative actions should be performed through named
+accounts and controlled privilege elevation.
+
+
+3. Implement automated protection against repeated SSH failures
+
+Deploy a mechanism such as Fail2ban or equivalent rate limiting.
+
+Reason:
+The supplied log shows repeated failed authentication attempts from
+192.168.56.20 and 203.0.113.55.
+
+
+4. Maintain minimum network exposure
+
+Continue using UFW with:
+
+default deny incoming
+
+and explicitly permit only:
+
+22/tcp
+80/tcp
+443/tcp
+
+Regularly compare firewall rules against listening services.
+
+
+5. Remove unnecessary services
+
+Periodically inspect:
+
+ss -tulpn
+ps aux
+
+Any unnecessary daemon or test listener should be stopped or removed.
+
+During this audit the temporary netcat listener on TCP/9000 was identified
+and removed.
+
+
+6. Apply security updates
+
+Regularly install security updates for Ubuntu, OpenSSH, Apache and other
+installed packages.
+
+Updates should be deployed in a controlled manner after testing where
+service availability is important.
+
+
+7. Monitor authentication and system logs
+
+Regularly review failed and successful SSH authentications, sudo activity
+and invalid-user attempts.
+
+Unexpected sources, repeated failures and privileged-account attempts
+should generate an investigation.
+
+
+8. Maintain and test backups
+
+Keep automated daily backups and periodically verify restoration, not only
+backup creation.
+
+Important backups should also be stored separately from the source system
+to reduce the impact of host failure, compromise or accidental deletion.

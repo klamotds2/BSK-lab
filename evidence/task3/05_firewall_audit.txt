@@ -1,0 +1,28 @@
+=== BSK Task 3 - Firewall audit ===
+
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing), deny (routed)
+New profiles: skip
+
+To                         Action      From
+--                         ------      ----
+22/tcp                     ALLOW IN    Anywhere                   # SSH
+80/tcp                     ALLOW IN    Anywhere                   # HTTP
+443/tcp                    ALLOW IN    Anywhere                   # HTTPS
+22/tcp (v6)                ALLOW IN    Anywhere (v6)              # SSH
+80/tcp (v6)                ALLOW IN    Anywhere (v6)              # HTTP
+443/tcp (v6)               ALLOW IN    Anywhere (v6)              # HTTPS
+
+
+--- Assessment ---
+Default incoming policy: DENY - appropriate.
+Default outgoing policy: ALLOW - appropriate.
+Allowed incoming services: SSH/22, HTTP/80, HTTPS/443.
+
+--- Listening ports after hardening ---
+Netid State  Recv-Q Send-Q Local Address:Port Peer Address:PortProcess                         
+tcp   LISTEN 0      511          0.0.0.0:443       0.0.0.0:*    users:(("apache2",pid=28,fd=4))
+tcp   LISTEN 0      128          0.0.0.0:22        0.0.0.0:*    users:(("sshd",pid=795,fd=3))  
+tcp   LISTEN 0      511          0.0.0.0:80        0.0.0.0:*    users:(("apache2",pid=28,fd=3))
+tcp   LISTEN 0      128             [::]:22           [::]:*    users:(("sshd",pid=795,fd=4))  

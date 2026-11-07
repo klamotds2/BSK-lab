@@ -1,0 +1,31 @@
+=== BSK Task 3 - Conclusions ===
+
+The security audit identified four initially listening TCP services:
+SSH/22, HTTP/80, HTTPS/443 and a temporary netcat listener on TCP/9000.
+
+TCP/9000 was unnecessary for the server role and was removed, reducing the
+attack surface. Required SSH, HTTP and HTTPS services remained operational.
+
+SSH configuration was hardened by disabling root login, reducing
+MaxAuthTries from 6 to 3, disabling X11 forwarding and disabling TCP
+forwarding.
+
+UFW remained active with a default deny policy for incoming connections
+and explicit exceptions only for SSH, HTTP and HTTPS.
+
+Analysis of the supplied BSK_Z4_auth.log identified legitimate public-key
+SSH logins as well as suspicious password-guessing and account-enumeration
+activity. The most active suspicious source was 192.168.56.20 with six
+failed password events. A second source, 203.0.113.55, made three failed
+attempts against the root account.
+
+A backup of /firma was created using rsync. File integrity was verified
+with SHA-256 and directory ownership and permissions were preserved.
+
+An automated daily backup was configured for 02:00 using cron. The schedule
+was selected as a typical low-activity period and limits the nominal data
+loss window to approximately 24 hours.
+
+The audit demonstrates that server security requires multiple complementary
+controls: reducing exposed services, SSH hardening, firewall filtering,
+log monitoring, reliable backups and regular security maintenance.

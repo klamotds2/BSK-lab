@@ -1,0 +1,31 @@
+=== BSK Task 3 - SSH security audit ===
+
+--- BEFORE hardening ---
+port 22
+maxauthtries 6
+permitrootlogin without-password
+pubkeyauthentication yes
+passwordauthentication yes
+x11forwarding yes
+permitemptypasswords no
+allowtcpforwarding yes
+loglevel INFO
+
+--- Applied hardening ---
+PermitRootLogin no
+MaxAuthTries 3
+X11Forwarding no
+AllowTcpForwarding no
+
+--- Effective configuration AFTER hardening ---
+port 22
+maxauthtries 3
+permitrootlogin no
+pubkeyauthentication yes
+passwordauthentication yes
+x11forwarding no
+permitemptypasswords no
+allowtcpforwarding no
+loglevel INFO
+
+SSH configuration syntax: OK

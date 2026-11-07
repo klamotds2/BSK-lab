@@ -1,0 +1,11 @@
+=== BSK Task 3 - Ports AFTER hardening ===
+
+Netid State  Recv-Q Send-Q Local Address:Port Peer Address:PortProcess                         
+tcp   LISTEN 0      511          0.0.0.0:443       0.0.0.0:*    users:(("apache2",pid=28,fd=4))
+tcp   LISTEN 0      128          0.0.0.0:22        0.0.0.0:*    users:(("sshd",pid=23,fd=3))   
+tcp   LISTEN 0      511          0.0.0.0:80        0.0.0.0:*    users:(("apache2",pid=28,fd=3))
+tcp   LISTEN 0      128             [::]:22           [::]:*    users:(("sshd",pid=23,fd=4))   
+
+RESULT:
+Unnecessary netcat service on TCP/9000 was stopped.
+Only required SSH, HTTP and HTTPS listening services remain.

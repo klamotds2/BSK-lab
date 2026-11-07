@@ -1,0 +1,32 @@
+=== BSK Task 3 - rsync backup and verification ===
+
+Source:      /firma/
+Destination: /backup/firma/
+
+--- Backup command ---
+rsync -aiv --delete /firma/ /backup/firma/
+
+--- Verification ---
+Initial backup contained the same regular files as the source.
+SHA-256 lists of source and backup were identical.
+RESULT: all backed-up files match the source SHA-256 values
+
+--- Permission preservation ---
+drwxr-xr-x 1 root root          4096 Nov  7 11:26 /firma
+drwxrws--- 2 root administracja 4096 Nov  7 11:28 /firma/administracja
+drwxrws--- 2 root it            4096 Nov  7 11:28 /firma/it
+drwxrws--- 2 root ksiegowosc    4096 Nov  7 12:05 /firma/ksiegowosc
+drwxrws--- 1 root pracownicy    4096 Nov  7 13:02 /firma/public
+
+drwxr-xr-x 6 root root          4096 Nov  7 11:26 /backup/firma
+drwxrws--- 2 root administracja 4096 Nov  7 11:28 /backup/firma/administracja
+drwxrws--- 2 root it            4096 Nov  7 11:28 /backup/firma/it
+drwxrws--- 2 root ksiegowosc    4096 Nov  7 12:05 /backup/firma/ksiegowosc
+drwxrws--- 2 root pracownicy    4096 Nov  7 13:02 /backup/firma/public
+
+--- Incremental backup test ---
+Created: /firma/public/backup_test.txt
+55a9581760bc09eba487c11d3a4b186dc5d6ffab20ea9a65fc1a32abc9d1b8e7  /firma/public/backup_test.txt
+55a9581760bc09eba487c11d3a4b186dc5d6ffab20ea9a65fc1a32abc9d1b8e7  /backup/firma/public/backup_test.txt
+
+RESULT: incremental backup file is identical to source

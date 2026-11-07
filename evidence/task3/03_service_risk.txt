@@ -1,0 +1,80 @@
+=== BSK Task 3 - Service risk assessment ===
+
+SSH - TCP/22
+Status: REQUIRED
+
+Purpose:
+Remote server administration.
+
+Risks:
+- password guessing
+- unauthorized remote access
+- root account targeting
+- abuse of SSH forwarding functions
+
+Controls applied:
+- UFW permits TCP/22 only as a required service
+- PermitRootLogin no
+- MaxAuthTries 3
+- X11Forwarding no
+- AllowTcpForwarding no
+- PermitEmptyPasswords no
+
+
+HTTP - TCP/80
+Status: REQUIRED
+
+Purpose:
+Web service required by the laboratory server role.
+
+Risks:
+- unencrypted HTTP traffic
+- web server vulnerabilities
+- unnecessary modules or applications
+
+Controls:
+- only required Apache service is running
+- HTTPS is available on TCP/443
+- UFW allows only required inbound services
+
+
+HTTPS - TCP/443
+Status: REQUIRED
+
+Purpose:
+Encrypted web access.
+
+Risks:
+- TLS misconfiguration
+- outdated server software
+- certificate management errors
+
+Controls:
+- Apache SSL configuration enabled
+- configuration validated using apachectl configtest
+- HTTPS functionality verified using curl
+
+
+Netcat - TCP/9000
+Status: UNNECESSARY - REMOVED
+
+Purpose:
+Temporary firewall-testing listener from Task 2.
+
+Risk:
+The process unnecessarily increased the server attack surface and had
+no production purpose.
+
+Action:
+The netcat process was terminated.
+
+Verification:
+TCP/9000 disappeared from ss -tulpn.
+Only TCP/22, TCP/80 and TCP/443 remain as required listening services.
+
+
+Conclusion:
+
+Every unnecessary listening service increases the server's attack surface.
+Services that are not required for the defined server role should be stopped
+or removed rather than relying solely on the firewall to protect them.
