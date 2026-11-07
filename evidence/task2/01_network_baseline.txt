@@ -1,0 +1,15 @@
+=== BSK Task 2 - Network baseline ===
+
+--- Interfaces ---
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+eth0@if7         UP             172.17.0.2/16 
+
+--- Routing table ---
+default via 172.17.0.1 dev eth0 
+172.17.0.0/16 dev eth0 proto kernel scope link src 172.17.0.2 
+
+--- Container IP ---
+172.17.0.2 
+
+--- Listening ports before service configuration ---
+Netid State Recv-Q Send-Q Local Address:Port Peer Address:PortProcess

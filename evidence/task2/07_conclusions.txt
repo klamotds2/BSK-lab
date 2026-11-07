@@ -1,0 +1,27 @@
+=== BSK Task 2 - Conclusions ===
+
+1. The server was configured to provide only the required services:
+   SSH on TCP/22, HTTP on TCP/80 and HTTPS on TCP/443.
+
+2. UFW was configured with default incoming traffic denied and outgoing
+   traffic allowed. Explicit incoming exceptions were created only for
+   TCP ports 22, 80 and 443.
+
+3. Firewall operation was verified from an independent Docker client.
+   Ports 22, 80 and 443 remained reachable, while an intentionally running
+   test service on TCP/9000 became unreachable after UFW was enabled.
+
+4. HTTP and HTTPS application tests returned HTTP/1.1 200 OK after the
+   firewall was enabled, confirming that legitimate services remained
+   operational.
+
+5. The laboratory dictionary analysis recovered 6 of 8 SHA-256 hashes.
+   This demonstrated that common and context-specific passwords can remain
+   vulnerable even when they appear superficially complex.
+
+6. H07 and H08 were not recovered with the supplied dictionary. This does
+   not prove that they are secure, only that they resisted this particular
+   dictionary test.
+
+7. A suitable password policy should emphasize password length, uniqueness,
+   avoidance of predictable patterns, password-manager usage and MFA.

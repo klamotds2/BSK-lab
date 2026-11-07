@@ -1,0 +1,43 @@
+=== BSK Task 2 - External connectivity and firewall tests ===
+
+Test host:
+bsk-client -> bsk-server (172.17.0.2)
+
+--- Before UFW ---
+22/tcp   SSH        reachable
+80/tcp   HTTP       reachable
+443/tcp  HTTPS      reachable
+9000/tcp test       reachable
+
+--- After UFW ---
+
+22/tcp - SSH:
+Connection to 172.17.0.2 port 22 succeeded
+
+80/tcp - HTTP:
+Connection to 172.17.0.2 port 80 succeeded
+
+443/tcp - HTTPS:
+Connection to 172.17.0.2 port 443 succeeded
+
+9000/tcp - unauthorized test service:
+Connection timed out.
+
+Important:
+Port 9000 remained in LISTEN state on bsk-server during the test.
+Therefore the timeout demonstrates firewall filtering rather than the
+absence of a listening service.
+
+--- Application tests after enabling UFW ---
+
+HTTP:
+HTTP/1.1 200 OK
+Server: Apache/2.4.58 (Ubuntu)
+
+HTTPS:
+HTTP/1.1 200 OK
+Server: Apache/2.4.58 (Ubuntu)
+
+Result:
+The firewall permits the required SSH, HTTP and HTTPS services while
+blocking other unsolicited incoming connections by default.

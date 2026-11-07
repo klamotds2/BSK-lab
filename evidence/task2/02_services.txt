@@ -1,0 +1,21 @@
+=== BSK Task 2 - Configured services ===
+
+--- Network addressing ---
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+eth0@if7         UP             172.17.0.2/16 
+
+--- Routing ---
+default via 172.17.0.1 dev eth0 
+172.17.0.0/16 dev eth0 proto kernel scope link src 172.17.0.2 
+
+--- Listening TCP services ---
+State  Recv-Q Send-Q Local Address:Port Peer Address:PortProcess                           
+LISTEN 0      128          0.0.0.0:22        0.0.0.0:*    users:(("sshd",pid=4330,fd=3))   
+LISTEN 0      511          0.0.0.0:80        0.0.0.0:*    users:(("apache2",pid=4466,fd=3))
+LISTEN 0      511          0.0.0.0:443       0.0.0.0:*    users:(("apache2",pid=4466,fd=4))
+LISTEN 0      128             [::]:22           [::]:*    users:(("sshd",pid=4330,fd=4))   
+
+--- Apache configuration test ---
+
+--- SSH configuration test ---
+SSH configuration: OK

@@ -1,0 +1,37 @@
+=== BSK Task 2 - UFW firewall configuration ===
+
+--- UFW status ---
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing), deny (routed)
+New profiles: skip
+
+To                         Action      From
+--                         ------      ----
+22/tcp                     ALLOW IN    Anywhere                   # SSH
+80/tcp                     ALLOW IN    Anywhere                   # HTTP
+443/tcp                    ALLOW IN    Anywhere                   # HTTPS
+22/tcp (v6)                ALLOW IN    Anywhere (v6)              # SSH
+80/tcp (v6)                ALLOW IN    Anywhere (v6)              # HTTP
+443/tcp (v6)               ALLOW IN    Anywhere (v6)              # HTTPS
+
+
+--- Numbered rules ---
+Status: active
+
+     To                         Action      From
+     --                         ------      ----
+[ 1] 22/tcp                     ALLOW IN    Anywhere                   # SSH
+[ 2] 80/tcp                     ALLOW IN    Anywhere                   # HTTP
+[ 3] 443/tcp                    ALLOW IN    Anywhere                   # HTTPS
+[ 4] 22/tcp (v6)                ALLOW IN    Anywhere (v6)              # SSH
+[ 5] 80/tcp (v6)                ALLOW IN    Anywhere (v6)              # HTTP
+[ 6] 443/tcp (v6)               ALLOW IN    Anywhere (v6)              # HTTPS
+
+
+--- Listening services ---
+LISTEN 0      1            0.0.0.0:9000      0.0.0.0:*    users:(("nc",pid=86,fd=3))     
+LISTEN 0      511          0.0.0.0:443       0.0.0.0:*    users:(("apache2",pid=28,fd=4))
+LISTEN 0      128          0.0.0.0:22        0.0.0.0:*    users:(("sshd",pid=23,fd=3))   
+LISTEN 0      511          0.0.0.0:80        0.0.0.0:*    users:(("apache2",pid=28,fd=3))
+LISTEN 0      128             [::]:22           [::]:*    users:(("sshd",pid=23,fd=4))   

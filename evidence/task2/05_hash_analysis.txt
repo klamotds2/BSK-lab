@@ -1,0 +1,38 @@
+=== BSK Task 2 - Laboratory SHA-256 dictionary analysis ===
+
+Method: SHA-256 dictionary comparison
+Dictionary: lecturer-provided BSK_Z2_slownik.txt
+Hashes: lecturer-provided BSK_Z2_hashe.txt
+
+--- Matches ---
+H01 MATCH password=admin
+H02 MATCH password=student
+H03 MATCH password=qwerty123
+H04 MATCH password=bezpieczenstwo
+H05 MATCH password=Chorzow2026
+H06 MATCH password=Linux!Lab2026
+
+--- Analysis ---
+
+Recovered hashes: 6 of 8 (75%).
+Not recovered using the supplied dictionary: H07, H08 (25%).
+
+H01-H04 demonstrate the weakness of common dictionary passwords.
+
+H05 demonstrates that a password containing a location name and year may still
+be predictable and vulnerable to a targeted dictionary.
+
+H06 demonstrates that apparent complexity is insufficient when the complete
+password is present in an attacker's dictionary.
+
+H07 and H08 were not recovered using the supplied dictionary. This does not
+prove that the passwords are secure; it only demonstrates resistance to this
+specific dictionary attack.
+
+The installed Ubuntu package John the Ripper 1.9.0 did not support the requested
+Raw-SHA256 format and returned:
+"Unknown ciphertext format name requested"
+
+Therefore the same laboratory dictionary attack was completed by calculating
+SHA-256 for every candidate in the lecturer-provided dictionary and comparing
+the results to the supplied laboratory hashes.
