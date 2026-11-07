@@ -1,0 +1,32 @@
+=== BSI Lab 1-2 - Named group and default ACL ===
+
+--- Directory ACL including defaults ---
+# file: lab/acl
+# owner: aleksander
+# group: projekt
+user::rwx
+user:student3:r-x
+group::r-x
+group:audit:r-x
+mask::r-x
+other::---
+default:user::rwx
+default:group::r-x
+default:group:audit:r-x
+default:mask::r-x
+default:other::---
+
+
+--- Newly created file ---
+# file: lab/acl/inherited.txt
+# owner: aleksander
+# group: aleksander
+user::rw-
+group::r-x	#effective:r--
+group:audit:r-x	#effective:r--
+mask::r--
+other::---
+
+
+--- Access via inherited ACL ---
+Inherited ACL test

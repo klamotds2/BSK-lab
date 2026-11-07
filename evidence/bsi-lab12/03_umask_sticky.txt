@@ -1,0 +1,11 @@
+=== BSI Lab 1-2 - umask and sticky bit ===
+
+--- umask 077 results ---
+drwx------ 2 aleksander aleksander 4096 Nov  7 13:56 /lab/bsi/private_dir
+-rw------- 1 aleksander aleksander    0 Nov  7 13:56 /lab/bsi/private_file.txt
+
+--- Shared directory ---
+drwxrwxrwt 2 root root 4096 Nov  7 13:57 /lab/shared
+
+Mode 1777 = rwx for users plus sticky bit.
+Sticky bit prevents users from deleting files owned by other users.

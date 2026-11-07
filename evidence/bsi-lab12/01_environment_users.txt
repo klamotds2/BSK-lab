@@ -1,0 +1,20 @@
+=== BSI Lab 1-2 - Environment and identities ===
+
+PRETTY_NAME="Ubuntu 24.04.5 LTS"
+VERSION="24.04.5 LTS (Noble Numbat)"
+
+getfacl 2.3.2
+setfacl 2.3.2
+gpg (GnuPG) 2.4.4
+libgcrypt 1.10.3
+
+--- Users ---
+uid=1001(aleksander) gid=1002(aleksander) groups=1002(aleksander),1001(projekt)
+uid=1002(student2) gid=1003(student2) groups=1003(student2),1001(projekt)
+uid=1003(student3) gid=1004(student3) groups=1004(student3)
+
+--- Project group ---
+projekt:x:1001:aleksander,student2
+
+--- Laboratory directory ---
+drwxr-x--- 2 aleksander projekt 4096 Nov  7 13:51 /lab/bsi

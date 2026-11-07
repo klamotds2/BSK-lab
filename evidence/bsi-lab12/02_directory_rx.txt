@@ -1,0 +1,13 @@
+=== BSI Lab 1-2 - Directory r/x permissions ===
+
+Test A: directory mode 740
+Group has r but no x.
+Directory entries can be listed, but known files cannot be traversed/accessed.
+
+Test B: directory mode 710
+Group has x but no r.
+Directory listing is denied, but a known filename can be accessed
+when the file itself grants sufficient permissions.
+
+Final restored mode:
+drwxr-x--- 2 aleksander projekt 4096 Nov  7 13:53 /lab/bsi

@@ -1,0 +1,19 @@
+=== BSI Lab 1-2 - GPG asymmetric encryption ===
+
+--- Recipient ---
+Student2 BSI Lab <student2@bsi.lab>
+Fingerprint:
+A5CC E0B7 9A75 3635 89FF BF05 055E D18A BE4D 9197
+
+--- Principle ---
+Message encrypted using Student2 PUBLIC key.
+Aleksander could not decrypt it because Student2 PRIVATE key was unavailable.
+GPG result: decryption failed: No secret key
+
+--- Original SHA-256 ---
+c978f5424ef8acd4b73447386556ebf6fdc30ee2578b221de60b1732b1f302d3  /lab/gpg/message_for_student2.txt
+
+--- Student2 decrypted SHA-256 ---
+c978f5424ef8acd4b73447386556ebf6fdc30ee2578b221de60b1732b1f302d3  /tmp/student2_decrypted.txt
+
+RESULT: Student2 decrypted the original message correctly

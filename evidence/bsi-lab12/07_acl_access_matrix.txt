@@ -1,0 +1,26 @@
+=== BSI Lab 1-2 - Final ACL access matrix ===
+
+--- ACL ---
+# file: lab/acl/inherited.txt
+# owner: aleksander
+# group: aleksander
+user::rw-
+group::r-x	#effective:r--
+group:audit:r-x	#effective:r--
+mask::r--
+other::---
+
+
+--- aleksander (owner) ---
+Inherited ACL test
+RESULT: ALLOWED
+
+--- student2 (projekt group) ---
+
+--- student3 (audit group) ---
+Inherited ACL test
+RESULT: ALLOWED
+
+--- outsider ---
+cat: /lab/acl/inherited.txt: Permission denied
+RESULT: DENIED - correct

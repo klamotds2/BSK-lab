@@ -1,0 +1,25 @@
+=== BSI Lab 1-2 - GPG digital signature ===
+
+--- Signing identity ---
+Aleksander BSI Lab <aleksander@bsi.lab>
+Fingerprint:
+E64E 5B50 C5B6 92E5 57CF 856E 1BD3 7E59 B340 0DD9
+
+--- Original-message verification ---
+gpg: Good signature from "Aleksander BSI Lab <aleksander@bsi.lab>"
+
+--- Tampering test ---
+The test copy was modified by adding: TAMPERED
+
+--- Verification after modification ---
+gpg: BAD signature from "Aleksander BSI Lab <aleksander@bsi.lab>"
+
+--- Interpretation ---
+A valid signature confirms that the signed data matches the data
+that was signed with Aleksander's private key.
+
+After the message was modified, verification failed.
+This demonstrates digital-signature integrity protection.
+
+The OpenPGP trust warning is expected because the imported
+laboratory public key was not certified through a trust relationship.

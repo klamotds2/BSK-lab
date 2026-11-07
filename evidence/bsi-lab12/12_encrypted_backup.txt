@@ -1,0 +1,24 @@
+=== BSI Lab 1-2 - Encrypted directory backup ===
+
+--- Source ---
+/lab/acl/
+
+--- Archive ---
+tar -cpf /lab/gpg/acl-backup.tar acl/
+
+--- Encryption ---
+GPG symmetric encryption using AES256
+
+--- Original archive SHA-256 ---
+f9c7969c7a76efcee8b88fb482333c7eb3db47db7541b71dc13615a2fc34aeca  /lab/gpg/acl-backup.tar
+
+--- Decrypted archive SHA-256 ---
+f9c7969c7a76efcee8b88fb482333c7eb3db47db7541b71dc13615a2fc34aeca  /lab/gpg/acl-backup-restored.tar
+
+RESULT: original and decrypted archives are identical
+
+--- Archive contents ---
+acl/
+acl/final_acl_test.txt
+acl/inherited.txt
+acl/Test.txt

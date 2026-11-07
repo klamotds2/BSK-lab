@@ -1,0 +1,48 @@
+=== BSI Lab 1-2 - Final ACL verification ===
+
+--- Directory ACL ---
+# file: lab/acl
+# owner: aleksander
+# group: projekt
+user::rwx
+user:student3:r-x
+group::r-x
+group:projekt:r-x
+group:audit:r-x
+mask::r-x
+other::---
+default:user::rwx
+default:group::r-x
+default:group:projekt:r-x
+default:group:audit:r-x
+default:mask::r-x
+default:other::---
+
+
+--- Inherited file ACL ---
+# file: lab/acl/final_acl_test.txt
+# owner: aleksander
+# group: aleksander
+user::rw-
+group::r-x	#effective:r--
+group:projekt:r-x	#effective:r--
+group:audit:r-x	#effective:r--
+mask::r--
+other::---
+
+
+--- aleksander / owner ---
+Final inherited ACL test
+RESULT: ALLOWED
+
+--- student2 / named projekt group ---
+Final inherited ACL test
+RESULT: ALLOWED
+
+--- student3 / named audit group ---
+Final inherited ACL test
+RESULT: ALLOWED
+
+--- outsider ---
+cat: /lab/acl/final_acl_test.txt: Permission denied
+RESULT: DENIED - correct

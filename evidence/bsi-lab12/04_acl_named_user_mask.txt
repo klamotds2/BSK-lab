@@ -1,0 +1,18 @@
+=== BSI Lab 1-2 - Named-user ACL and mask ===
+
+--- Final ACL ---
+# file: lab/acl
+# owner: aleksander
+# group: projekt
+user::rwx
+user:student3:r-x
+group::r-x
+mask::r-x
+other::---
+
+
+--- User membership ---
+uid=1003(student3) gid=1004(student3) groups=1004(student3)
+
+--- Access test after mask restoration ---
+ACL laboratory file

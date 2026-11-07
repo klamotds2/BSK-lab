@@ -1,0 +1,19 @@
+=== BSI Lab 1-2 - chmod interaction with ACL mask ===
+
+An extended ACL was already present.
+chmod therefore modifies the ACL class/mask.
+
+--- State after restoring chmod 750 ---
+drwxr-x---+ 2 aleksander projekt 4096 Nov  7 13:58 /lab/acl
+# file: lab/acl
+# owner: aleksander
+# group: projekt
+user::rwx
+user:student3:r-x
+group::r-x
+mask::r-x
+other::---
+
+
+--- Named-user access ---
+ACL laboratory file

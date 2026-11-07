@@ -1,0 +1,22 @@
+=== BSI Lab 1-2 - GPG symmetric encryption ===
+
+--- Files ---
+-rw------- 1 aleksander aleksander  45 Nov  7 14:04 /lab/gpg/poufne.txt
+-rw------- 1 aleksander aleksander 122 Nov  7 14:05 /lab/gpg/poufne.txt.gpg
+-rw------- 1 aleksander aleksander  45 Nov  7 14:06 /lab/gpg/poufne_decrypted.txt
+
+--- Original SHA-256 ---
+db274584c92b73779b352855c95c502bf1a33c7cc298251db1f7af41bde65852  /lab/gpg/poufne.txt
+
+--- Encrypted SHA-256 ---
+fa9e2ca761e338ad524468b84f6d4965e457740c6e9bec2c35cfc8025dca87f9  /lab/gpg/poufne.txt.gpg
+
+--- Decrypted SHA-256 ---
+db274584c92b73779b352855c95c502bf1a33c7cc298251db1f7af41bde65852  /lab/gpg/poufne_decrypted.txt
+
+--- Integrity verification ---
+RESULT: original and decrypted files are identical
+
+--- Method ---
+GnuPG symmetric encryption using AES256.
+Passphrase entered interactively and not stored in evidence.
